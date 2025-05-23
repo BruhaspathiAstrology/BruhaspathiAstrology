@@ -1,180 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="astroApp">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Bruhaspathi Astrology</title>
-    <style>
-        body {
-            background-color: lightblue;
-            font-family: Arial, sans-serif;
-            padding: 0;
-            margin: 0;
-        }
-        .border-container {
-            padding: 20px;
-            margin: 20px;
-            position: relative;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-        .border-title {
-            content: "బ్రుహస్పతి జ్యోతిష్యాలయం";
-            font-size: 1.8em;
-            font-weight: bold;
-            color: black;
-            width: 100%;
-            text-align: center;
-            background-color: yellow;
-            padding: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
-        .selection-container {
-            margin: 20px 0;
-            text-align: center;
-        }
-        .result {
-            font-weight: bold;
-            color: red;
-            background-color: yellow;
-            padding: 10px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .logo img {
-            max-width: 100%;
-            height: auto;
-        }
-        .company-info {
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            background-color: yellow;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 3px solid black;
-        }
-        select, button {
-            font-size: 1em;
-            padding: 10px;
-            margin: 10px;
-            width: 80%;
-            max-width: 300px;
-            box-sizing: border-box;
-        }
-        button {
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Bruhaspathi Astrology</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #e0f7fa;
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      padding: 20px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .title {
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      background-color: #ffeb3b;
+      color: black;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .form-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .result {
+      text-align: center;
+      font-weight: bold;
+      color: red;
+      background-color: #ffeb3b;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+      alert("Note: This site is optimized for mobile, but works on desktop too.");
+    }
+  </script>
 </head>
-<body>
-    <div class="border-container">
-        <div class="border-title">బ్రుహస్పతి జ్యోతిష్యాలయం</div>
-        <div class="logo">
-            <img src="/mnt/data/image.png" alt="Bruhaspathi Astrology Logo">
-        </div>
-        <div class="company-info">
-            బ్రుహస్పతి జ్యోతిష్యాలయం<br>
-            జాతక కర్త: దేవులపల్లి బాలచంద్ర శర్మ
-        </div>
+<body ng-controller="AstroController">
+  <div class="container">
+    <div class="title">బ్రుహస్పతి జ్యోతిష్యాలయం</div>
 
-        <div class="selection-container">
-            <form id="astroForm">
-                <label for="star1">Select Star 1:</label><br>
-                <select id="star1">
-                    <option value="Ashwini">Ashwini</option>
-                    <option value="Magham">Magham</option>
-                    <option value="Moolam">Moolam</option>
-                    <option value="Bharani">Bharani</option>
-                    <option value="P.Phalguni">P.Phalguni</option>
-                    <option value="P.Shadha">P.Shadha</option>
-                    <option value="Kritika">Kritika</option>
-                    <option value="U.Phalguni">U.Phalguni</option>
-                    <option value="U.Shadha">U.Shadha</option>
-                    <option value="Rohini">Rohini</option>
-                    <option value="Hasta">Hasta</option>
-                    <option value="Shravan">Shravan</option>
-                    <option value="Mrigashirsh">Mrigashirsh</option>
-                    <option value="Chitra">Chitra</option>
-                    <option value="Dhanistha">Dhanistha</option>
-                    <option value="Arudra">Arudra</option>
-                    <option value="Swati">Swati</option>
-                    <option value="Shatabhisha">Shatabhisha</option>
-                    <option value="Punarvasu">Punarvasu</option>
-                    <option value="Vishakha">Vishakha</option>
-                    <option value="P.Bhadra">P.Bhadra</option>
-                    <option value="Pushya">Pushya</option>
-                    <option value="Anuradha">Anuradha</option>
-                    <option value="U.Bhadra">U.Bhadra</option>
-                    <option value="Ashlesha">Ashlesha</option>
-                    <option value="Jyeshta">Jyeshta</option>
-                    <option value="Revathi">Revathi</option>
-                </select><br>
-                
-                <label for="star2">Select Star 2:</label><br>
-                <select id="star2">
-                    <option value="Ashwini">Ashwini</option>
-                    <option value="Magham">Magham</option>
-                    <option value="Moolam">Moolam</option>
-                    <option value="Bharani">Bharani</option>
-                    <option value="P.Phalguni">P.Phalguni</option>
-                    <option value="P.Shadha">P.Shadha</option>
-                    <option value="Kritika">Kritika</option>
-                    <option value="U.Phalguni">U.Phalguni</option>
-                    <option value="U.Shadha">U.Shadha</option>
-                    <option value="Rohini">Rohini</option>
-                    <option value="Hasta">Hasta</option>
-                    <option value="Shravan">Shravan</option>
-                    <option value="Mrigashirsh">Mrigashirsh</option>
-                    <option value="Chitra">Chitra</option>
-                    <option value="Dhanistha">Dhanistha</option>
-                    <option value="Arudra">Arudra</option>
-                    <option value="Swati">Swati</option>
-                    <option value="Shatabhisha">Shatabhisha</option>
-                    <option value="Punarvasu">Punarvasu</option>
-                    <option value="Vishakha">Vishakha</option>
-                    <option value="P.Bhadra">P.Bhadra</option>
-                    <option value="Pushya">Pushya</option>
-                    <option value="Anuradha">Anuradha</option>
-                    <option value="U.Bhadra">U.Bhadra</option>
-                    <option value="Ashlesha">Ashlesha</option>
-                    <option value="Jyeshta">Jyeshta</option>
-                    <option value="Revathi">Revathi</option>
-                </select><br>
-                
-                <button type="submit" id="showCombinationButton">Show Combination</button>
-            </form>
-        </div>
-        
-        <div id="combinationResult" class="result"></div>
+    <div class="text-center mb-3">
+      <img src="https://example.com/astro_logo.png" alt="Bruhaspathi Astrology Logo" class="img-fluid">
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const astroForm = document.getElementById('astroForm');
-            const combinationResult = document.getElementById('combinationResult');
+    <div class="text-center mb-3">
+      జాతక కర్త: దేవులపల్లి బాలచంద్ర శర్మ
+    </div>
 
-            astroForm.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevent form submission from reloading the page
+    <div class="form-container">
+      <form ng-submit="showCombination()">
+        <div class="mb-3">
+          <label for="star1" class="form-label">Select Star 1:</label>
+          <select id="star1" class="form-select" ng-model="star1">
+            <option ng-repeat="star in stars" value="{{star}}">{{star}}</option>
+          </select>
+        </div>
 
-                const star1 = document.getElementById('star1').value;
-                const star2 = document.getElementById('star2').value;
-                
-                let combination = "";
-                if (star1 === star2) {
-                    combination = `The combination of ${star1} with itself includes: Bharani, P.Phalguni, P.Shadha, Rohini, Hasta, Shravan, Arudra, Swati, Shatabhisha, Pushya, Anuradha, U.Bhadra, Ashlesha, Jyeshta, Revathi`;
-                } else {
-                    combination = `The combination of ${star1} and ${star2} is: Bharani, P.Phalguni, P.Shadha, Rohini, Hasta, Shravan, Arudra, Swati, Shatabhisha, Pushya, Anuradha, U.Bhadra, Ashlesha, Jyeshta, Revathi`;
-                }
-                
-                combinationResult.innerHTML = combination;
-            });
-        });
-    </script>
+        <div class="mb-3">
+          <label for="star2" class="form-label">Select Star 2:</label>
+          <select id="star2" class="form-select" ng-model="star2">
+            <option ng-repeat="star in stars" value="{{star}}">{{star}}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Show Combination</button>
+      </form>
+    </div>
+
+    <div id="combinationResult" class="result" ng-if="combination">
+      {{ combination }}
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    const app = angular.module('astroApp', []);
+    app.controller('AstroController', ['$scope', function($scope) {
+      $scope.stars = [
+        "Ashwini", "Magham", "Moolam", "Bharani", "P.Phalguni", "P.Shadha", "Kritika",
+        "U.Phalguni", "U.Shadha", "Rohini", "Hasta", "Shravan", "Mrigashirsh", "Chitra",
+        "Dhanistha", "Arudra", "Swati", "Shatabhisha", "Punarvasu", "Vishakha", "P.Bhadra",
+        "Pushya", "Anuradha", "U.Bhadra", "Ashlesha", "Jyeshta", "Revathi"
+      ];
+
+      $scope.showCombination = function() {
+        if ($scope.star1 === $scope.star2) {
+          $scope.combination = `The combination of ${$scope.star1} with itself includes: Bharani, P.Phalguni, P.Shadha, Rohini, Hasta, Shravan, Arudra, Swati, Shatabhisha, Pushya, Anuradha, U.Bhadra, Ashlesha, Jyeshta, Revathi`;
+        } else {
+          $scope.combination = `The combination of ${$scope.star1} and ${$scope.star2} is: Bharani, P.Phalguni, P.Shadha, Rohini, Hasta, Shravan, Arudra, Swati, Shatabhisha, Pushya, Anuradha, U.Bhadra, Ashlesha, Jyeshta, Revathi`;
+        }
+      };
+    }]);
+  </script>
 </body>
 </html>
